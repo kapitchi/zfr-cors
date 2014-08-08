@@ -46,6 +46,11 @@ class CorsService
     {
         $this->options = $options;
     }
+    
+    public function isForceAllow()
+    {
+        return $this->options->getForceAllow();
+    }
 
     /**
      * Check if the HTTP request is a CORS request by checking if the Origin header is present and that the
@@ -174,7 +179,7 @@ class CorsService
     protected function getAllowedOriginValue(HttpRequest $request)
     {
         $allowedOrigins = $this->options->getAllowedOrigins();
-
+        
         if (in_array('*', $allowedOrigins)) {
             return '*';
         }

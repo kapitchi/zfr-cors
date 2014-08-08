@@ -69,6 +69,8 @@ class CorsOptions extends AbstractOptions
      * @var bool
      */
     protected $allowedCredentials = false;
+    
+    protected $forceAllow;
 
     /**
      * @param  array $allowedOrigins
@@ -174,5 +176,21 @@ class CorsOptions extends AbstractOptions
     public function getAllowedCredentials()
     {
         return $this->allowedCredentials;
+    }
+
+    /**
+     * @param boolean $forceAllow
+     */
+    public function setForceAllow($forceAllow)
+    {
+        $this->forceAllow = $forceAllow;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getForceAllow()
+    {
+        return $this->forceAllow;
     }
 }
