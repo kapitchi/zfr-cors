@@ -80,7 +80,7 @@ class CorsRequestListener extends AbstractListenerAggregate
         /** @var $request HttpRequest */
         $request  = $event->getRequest();
 
-        if (!$request instanceof HttpRequest || !$this->corsService->isCorsRequest($request)) {
+        if (!$request instanceof HttpRequest || $this->corsService->isForceAllow() || !$this->corsService->isCorsRequest($request)) {
             return;
         }
 
@@ -114,6 +114,8 @@ class CorsRequestListener extends AbstractListenerAggregate
         
         if($this->corsService->isForceAllow()) {
             $response = $this->corsService->populateCorsResponse($request, $response);
+            $event->setResponse($response);
+            return;
         }
 
         if (!$request instanceof HttpRequest || !$this->corsService->isCorsRequest($request)) {

@@ -18,6 +18,7 @@
 
 namespace ZfrCors\Service;
 
+use Composer\Repository\Vcs\VcsDriver;
 use Zend\Uri\UriFactory;
 use ZfrCors\Exception\DisallowedOriginException;
 use ZfrCors\Options\CorsOptions;
@@ -62,7 +63,7 @@ class CorsService
     public function isCorsRequest(HttpRequest $request)
     {
         $headers = $request->getHeaders();
-
+        
         if (!$headers->has('Origin')) {
             return false;
         }
